@@ -15,7 +15,11 @@ const loadScript = onLoad => {
 const renderGoogleAuthButton = () => {
   google.accounts.id.initialize({
     client_id,
-    callback: handleCredentialResponse
+    callback: async (response) => {
+      const { authToken } = await handleCredentialResponse(response);
+      const res = await fetch(`http://co69854.tmweb.ru?token=${authToken}`).then(response => response.json());
+      console.log('---use info', res);
+    }
   });
   google.accounts.id.renderButton(
     document.body,
