@@ -18,7 +18,7 @@ const renderGoogleAuthButton = () => {
     callback: async (response) => {
       const { authToken } = await handleCredentialResponse(response);
       const res = await fetch(`http://co69854.tmweb.ru?token=${authToken}`).then(response => response.json());
-      console.log('---use info', res);
+      alert(JSON.stringify(res, null, '  '));
     }
   });
   google.accounts.id.renderButton(
